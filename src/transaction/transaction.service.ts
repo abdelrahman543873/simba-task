@@ -21,7 +21,7 @@ export class TransactionService {
     const convertedMoney = input.amount * input.exchangeRate;
     if (convertedMoney > this.request.currentUser.balance)
       throw new BaseHttpException(LangEnum.EN, 603);
-    await this.transactionRepo.sendMoney(
+    return await this.transactionRepo.sendMoney(
       this.request.currentUser.id,
       receivingUser.id,
       input.amount,

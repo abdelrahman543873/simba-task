@@ -15,7 +15,6 @@ export class UserRepository {
   }
 
   async findUserByEmail(email: string) {
-    console.log(await this.Model.findAll());
     return await this.Model.findOne({
       where: { email },
       raw: true,

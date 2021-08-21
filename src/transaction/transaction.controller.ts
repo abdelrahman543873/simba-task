@@ -1,4 +1,4 @@
-import { Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { TransactionInput } from './inputs/transaction.input';
@@ -11,7 +11,7 @@ export class TransactionController {
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Post('send')
-  async sendMoney(input: TransactionInput) {
-    return this.transactionService.sendMoney(input);
+  async sendMoney(@Body() input: TransactionInput) {
+    return await this.transactionService.sendMoney(input);
   }
 }
