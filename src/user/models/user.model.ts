@@ -8,6 +8,5 @@ import {
   paranoid: true,
   indexes: []
 })
-@ObjectType()
 export class School extends Model<School> {
 }
