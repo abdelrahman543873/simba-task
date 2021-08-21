@@ -6,6 +6,7 @@ import {
   Default,
   PrimaryKey,
   AllowNull,
+  Unique,
 } from 'sequelize-typescript';
 
 @Table({
@@ -31,6 +32,7 @@ export class User extends Model {
   @Column
   password: string;
 
+  @Unique
   @AllowNull(false)
   @Column({
     set(val: string) {

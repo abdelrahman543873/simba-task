@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { User } from '../user/models/user.model';
+import { env } from '../utils/env';
 
 export const databaseProviders = [
   // change this to .env
@@ -7,12 +8,12 @@ export const databaseProviders = [
     provide: 'SEQUELIZE',
     useFactory: async () => {
       const sequelize = new Sequelize({
-        port: 5432,
-        host:'localhost',
-        database: 'simba',
-        username: 'simba',
+        port: +env.port,
+        host: env.host,
+        database: env.database,
+        username: env.username,
         dialect: 'postgres',
-        password: 'vindiesel3',
+        password: env.password,
       });
       sequelize.addModels([User]);
       await sequelize.sync();
