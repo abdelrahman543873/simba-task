@@ -40,4 +40,6 @@ export class User extends Model {
     },
   })
   email: string;
+
+  token: string;
 }

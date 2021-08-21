@@ -10,7 +10,11 @@ export class UserRepository {
   async addUser(user: RegisterInput) {
     return await this.Model.create({
       ...user,
-      password:await hashPass(user.password),
+      password: await hashPass(user.password),
     });
+  }
+
+  async findUserByEmail(email: string) {
+    return await this.Model.findOne({ where: { email } });
   }
 }
