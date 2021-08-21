@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     const currentUser = await this.helperService.getCurrentUser(
       request.appContext,
     );
-    if (!currentUser) throw new BaseHttpException(LangEnum.EN, 600);
+    if (!currentUser) throw new BaseHttpException(LangEnum.EN, 602);
     request.currentUser = currentUser;
     return true;
   }

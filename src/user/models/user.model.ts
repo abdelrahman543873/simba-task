@@ -34,12 +34,16 @@ export class User extends Model {
 
   @Unique
   @AllowNull(false)
-  @Column({
-    set(val: string) {
-      if (val) (this as any).setDataValue('email', val.toLocaleLowerCase());
-    },
-  })
+  @Column
   email: string;
+
+  @AllowNull(false)
+  @Column({ type: DataType.FLOAT })
+  balance: number;
+
+  @AllowNull(false)
+  @Column
+  currency: string;
 
   token: string;
 }

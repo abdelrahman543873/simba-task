@@ -1,13 +1,18 @@
-import { IsNotEmpty, IsEmail, IsString, IsCurrency } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsEmail, IsCurrency, IsNumber } from 'class-validator';
 
 export class TransactionInput {
   @IsEmail()
   to: string;
 
-  @IsString()
-  @IsNotEmpty()
-  amount: string;
+  @Type(() => Number)
+  @IsNumber()
+  amount: number;
+
+  @Type(() => Number)
+  @IsNumber()
+  exchangeRate: number;
 
   @IsCurrency()
-  currency: string;
+  targetCurrency: string;
 }

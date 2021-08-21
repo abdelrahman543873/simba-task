@@ -1,4 +1,3 @@
-import { REGISTER } from '../endpoints/user';
 import { testRequest } from '../request';
 import { HTTP_METHODS_ENUM } from '../request.methods.enum';
 import { userFactory, buildUserParams } from '../../src/user/user.factory';
@@ -15,7 +14,7 @@ describe('user login suite case', () => {
         password: userParams.password,
       },
     });
-    expect(res.body.email).toBe(userParams.email.toLowerCase());
+    expect(res.body.email).toBe(userParams.email);
     expect(res.body).toHaveProperty('token');
   });
 });

@@ -1,14 +1,16 @@
-import { address, internet } from 'faker';
+import { address, finance, internet } from 'faker';
 import { sign } from 'jsonwebtoken';
 import { env } from '../shared/utils/env';
 import { hashPass } from '../shared/utils/bcrypt.util';
 import { User } from './models/user.model';
 
 interface UserType {
-  name: string;
-  email: string;
-  address: string;
-  password: string;
+  name?: string;
+  email?: string;
+  balance?: number;
+  address?: string;
+  password?: string;
+  currency?: string;
 }
 
 export const buildUserParams = (obj?: UserType): UserType => {
@@ -17,6 +19,8 @@ export const buildUserParams = (obj?: UserType): UserType => {
     address: obj?.address || address.streetAddress(),
     name: obj?.name || internet.userName(),
     email: obj?.email || internet.email(),
+    balance: obj?.balance || +finance.amount(),
+    currency: obj?.currency || finance.currencyCode(),
   };
 };
 

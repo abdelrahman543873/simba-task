@@ -10,8 +10,8 @@ export class TransactionController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
-  @Post('add')
-  async addTransaction(input: TransactionInput) {
-    return this.transactionService.addTransaction(input);
+  @Post('send')
+  async sendMoney(input: TransactionInput) {
+    return this.transactionService.sendMoney(input);
   }
 }

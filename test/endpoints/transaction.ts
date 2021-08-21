@@ -1,1 +1,1 @@
-export const ADD_TRANSACTION = '/transaction/add';
+export const SEND_TRANSACTION = '/transaction/send';

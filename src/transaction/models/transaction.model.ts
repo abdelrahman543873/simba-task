@@ -22,7 +22,7 @@ export class Transaction extends Model {
   @Column({ type: DataType.UUID })
   id: string;
 
-  @AllowNull(false)
+  @AllowNull(true)
   @ForeignKey(() => User)
   @Column({ type: DataType.UUID })
   from: string;
@@ -33,8 +33,8 @@ export class Transaction extends Model {
   to: string;
 
   @AllowNull(false)
-  @Column
-  amount: string;
+  @Column({ type: DataType.INTEGER })
+  amount: number;
 
   @Unique
   @AllowNull(false)

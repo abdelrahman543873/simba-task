@@ -1,9 +1,9 @@
 import { Sequelize } from 'sequelize-typescript';
 import { User } from '../../user/models/user.model';
 import { env } from '../utils/env';
+import { Transaction } from '../../transaction/models/transaction.model';
 
 export const databaseProviders = [
-  // change this to .env
   {
     provide: 'SEQUELIZE',
     useFactory: async () => {
@@ -16,7 +16,7 @@ export const databaseProviders = [
         password: env.password,
         logging: false,
       });
-      sequelize.addModels([User]);
+      sequelize.addModels([User, Transaction]);
       await sequelize.sync();
       return sequelize;
     },
