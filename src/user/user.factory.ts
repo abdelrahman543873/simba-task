@@ -1,5 +1,7 @@
 import { address, internet } from 'faker';
-import { hashPass } from '../utils/bcrypt.util';
+import { sign } from 'jsonwebtoken';
+import { env } from '../shared/utils/env';
+import { hashPass } from '../shared/utils/bcrypt.util';
 import { User } from './models/user.model';
 
 interface UserType {
@@ -31,5 +33,14 @@ export const usersFactory = async (
 
 export const userFactory = async (obj?: UserType): Promise<User> => {
   const params: UserType = buildUserParams(obj);
-  return User.create({ ...params, password: await hashPass(params.password) });
+  const user = await User.create(
+    {
+      ...params,
+      password: await hashPass(params.password),
+    },
+    { raw: true },
+  );
+  const token = sign({ userId: user.id }, env.JWT_SECRET);
+  user.token = token;
+  return user;
 };

@@ -1,9 +1,9 @@
-import { env } from './../utils/env';
+import { env } from '../shared/utils/env';
 import { Injectable } from '@nestjs/common';
-import { BaseHttpException } from '../exceptions/base-http-exception';
+import { BaseHttpException } from '../shared/exceptions/base-http-exception';
 import { UserRepository } from '../user/user.repository';
 import { AuthInput } from './inputs/auth.input';
-import { bcryptCheckPass } from '../utils/bcrypt.util';
+import { bcryptCheckPass } from '../shared/utils/bcrypt.util';
 import { sign } from 'jsonwebtoken';
 
 @Injectable()

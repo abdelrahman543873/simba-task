@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { hashPass } from '../utils/bcrypt.util';
+import { hashPass } from '../shared/utils/bcrypt.util';
 import { RegisterInput } from './inputs/user.input';
 import { User } from './models/user.model';
 
@@ -18,6 +18,12 @@ export class UserRepository {
     return await this.Model.findOne({
       where: { email: email.toLowerCase() },
       raw: true,
+    });
+  }
+
+  async findUserById(id: string) {
+    return await this.Model.findOne({
+      where: { id },
     });
   }
 }
