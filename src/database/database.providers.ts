@@ -7,12 +7,12 @@ export const databaseProviders = [
     provide: 'SEQUELIZE',
     useFactory: async () => {
       const sequelize = new Sequelize({
-        dialect: 'postgres',
-        host: 'localhost',
         port: 5432,
-        username: 'root',
-        password: 'vindesel3',
+        host:'localhost',
         database: 'simba',
+        username: 'simba',
+        dialect: 'postgres',
+        password: 'vindiesel3',
       });
       sequelize.addModels([User]);
       await sequelize.sync();
