@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Sequelize } from 'sequelize-typescript';
+import { Inject, Injectable } from '@nestjs/common';
 import { hashPass } from '../shared/utils/bcrypt.util';
 import { RegisterInput } from './inputs/user.input';
 import { User } from './models/user.model';
@@ -6,20 +7,23 @@ import { Transaction } from '../transaction/models/transaction.model';
 
 @Injectable()
 export class UserRepository {
+  constructor(@Inject('SEQUELIZE') private readonly sequelize: Sequelize) {}
   private readonly Model = User;
 
   async addUser(user: RegisterInput) {
-    const userRecord = await this.Model.create({
-      ...user,
-      password: await hashPass(user.password),
+    return await this.sequelize.transaction(async (transaction) => {
+      const userRecord = await this.Model.create({
+        ...user,
+        password: await hashPass(user.password),
+      });
+      await Transaction.create({
+        from: null,
+        to: userRecord.id,
+        currency: 'USD',
+        amount: 1000,
+      });
+      return userRecord.toJSON();
     });
-    await Transaction.create({
-      from: null,
-      to: userRecord.id,
-      currency: 'USD',
-      amount: 1000,
-    });
-    return userRecord;
   }
 
   async findUserByEmail(email: string) {
