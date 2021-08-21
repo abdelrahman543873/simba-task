@@ -8,4 +8,8 @@ export const LocalizedErrorMessages: IErrorMessage = {
     EN: "you don't have enough balance",
     AR: "you don't have enough balance",
   },
+  605: {
+    EN: "can't send money to yourself!",
+    AR: "can't send money to yourself!",
+  },
 };

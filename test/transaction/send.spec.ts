@@ -26,4 +26,54 @@ describe('send money suite case', () => {
     expect(res.body.amount).toBe(5);
     expect(res.body.currency).toBe('USD');
   });
+
+  it('should error if sent money is less than balance', async () => {
+    const sender = await userFactory({ balance: 5 });
+    const receiver = await userFactory({ balance: 5 });
+    const res = await testRequest({
+      method: HTTP_METHODS_ENUM.POST,
+      url: SEND_TRANSACTION,
+      token: sender.token,
+      variables: {
+        to: receiver.email,
+        amount: 5,
+        exchangeRate: 2,
+        targetCurrency: 'NGN',
+      },
+    });
+    expect(res.body.statusCode).toBe(603);
+  });
+
+  it("should throw error if receiver doesn't exist", async () => {
+    const sender = await userFactory({ balance: 5 });
+    const receiverParams = await buildUserParams();
+    const res = await testRequest({
+      method: HTTP_METHODS_ENUM.POST,
+      url: SEND_TRANSACTION,
+      token: sender.token,
+      variables: {
+        to: receiverParams.email,
+        amount: 5,
+        exchangeRate: 2,
+        targetCurrency: 'NGN',
+      },
+    });
+    expect(res.body.statusCode).toBe(600);
+  });
+
+  it('should throw error if receiver is Sender', async () => {
+    const sender = await userFactory({ balance: 5 });
+    const res = await testRequest({
+      method: HTTP_METHODS_ENUM.POST,
+      url: SEND_TRANSACTION,
+      token: sender.token,
+      variables: {
+        to: sender.email,
+        amount: 5,
+        exchangeRate: 2,
+        targetCurrency: 'NGN',
+      },
+    });
+    expect(res.body.statusCode).toBe(605);
+  });
 });
