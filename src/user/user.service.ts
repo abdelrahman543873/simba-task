@@ -15,4 +15,8 @@ export class UserService {
     user['token'] = token;
     return user;
   }
+
+  async userList() {
+    return await this.userRepo.userList();
+  }
 }

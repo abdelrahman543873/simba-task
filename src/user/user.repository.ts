@@ -38,4 +38,8 @@ export class UserRepository {
       where: { id },
     });
   }
+
+  async userList() {
+    return await this.Model.findAll();
+  }
 }

@@ -26,7 +26,7 @@ export const buildUserParams = (obj?: UserType): UserType => {
 
 export const usersFactory = async (
   count = 10,
-  obj: UserType,
+  obj?: UserType,
 ): Promise<User[]> => {
   const users: UserType[] = [];
   for (let i = 0; i < count; i++) {

@@ -1,5 +1,5 @@
 import { UserService } from './user.service';
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { RegisterInput } from './inputs/user.input';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -10,7 +10,12 @@ export class UserController {
   @ApiTags('user')
   @Post('register')
   async registerUser(@Body() input: RegisterInput) {
-    return this.userService.registerUser(input)
+    return this.userService.registerUser(input);
   }
 
+  @ApiTags('user')
+  @Get('list')
+  async userList() {
+    return this.userService.userList();
+  }
 }
