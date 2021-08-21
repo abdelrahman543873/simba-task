@@ -1,4 +1,5 @@
 import { address, internet } from 'faker';
+import { hashPass } from '../utils/bcrypt.util';
 import { User } from './models/user.model';
 
 interface UserType {
@@ -10,7 +11,7 @@ interface UserType {
 
 export const buildUserParams = (obj?: UserType): UserType => {
   return {
-    password: obj?.password || internet.mac(),
+    password: obj?.password || internet.password(),
     address: obj?.address || address.streetAddress(),
     name: obj?.name || internet.userName(),
     email: obj?.email || internet.email(),
@@ -28,7 +29,7 @@ export const usersFactory = async (
   return await User.bulkCreate(users);
 };
 
-export const userFactory = async (obj: UserType): Promise<User> => {
+export const userFactory = async (obj?: UserType): Promise<User> => {
   const params: UserType = buildUserParams(obj);
-  return User.create(params);
+  return User.create({ ...params, password: await hashPass(params.password) });
 };

@@ -15,6 +15,9 @@ export class UserRepository {
   }
 
   async findUserByEmail(email: string) {
-    return await this.Model.findOne({ where: { email } });
+    return await this.Model.findOne({
+      where: { email: email.toLowerCase() },
+      raw: true,
+    });
   }
 }
