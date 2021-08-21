@@ -1,5 +1,6 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
+import { Op } from 'sequelize';
 import { User } from '../user/models/user.model';
 import { Transaction } from './models/transaction.model';
 
@@ -35,6 +36,12 @@ export class TransactionRepository {
         },
         { transaction },
       );
+    });
+  }
+
+  async getMyTransactions(id: string) {
+    return await this.Model.findAll({
+      where: { [Op.or]: [{ from: id }, { to: id }] },
     });
   }
 }

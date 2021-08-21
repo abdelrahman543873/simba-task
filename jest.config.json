@@ -7,5 +7,7 @@
     "^.+\\.(t|j)s$": "ts-jest"
   },
   "collectCoverageFrom": ["**/*.(t|j)s"],
-  "coverageDirectory": "../coverage"
+  "coverageDirectory": "../coverage",
+  "setupFilesAfterEnv": ["<rootDir>/test/before-test-run.ts"],
+  "moduleDirectories": ["node_modules", "src", "test"]
 }

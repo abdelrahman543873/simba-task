@@ -17,7 +17,7 @@ export class TransactionService {
 
   async sendMoney(input: TransactionInput) {
     if (input.to === this.request.currentUser.email)
-      throw new BaseHttpException(LangEnum.EN,605);
+      throw new BaseHttpException(LangEnum.EN, 605);
     const receivingUser = await this.userRepo.findUserByEmail(input.to);
     if (!receivingUser) throw new BaseHttpException(LangEnum.EN, 600);
     const convertedMoney = input.amount * input.exchangeRate;
@@ -29,6 +29,12 @@ export class TransactionService {
       input.amount,
       convertedMoney,
       input.targetCurrency,
+    );
+  }
+
+  async getMyTransactions() {
+    return await this.transactionRepo.getMyTransactions(
+      this.request.currentUser.id,
     );
   }
 }

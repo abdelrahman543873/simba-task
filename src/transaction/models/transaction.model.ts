@@ -33,7 +33,7 @@ export class Transaction extends Model {
   to: string;
 
   @AllowNull(false)
-  @Column({ type: DataType.INTEGER })
+  @Column({ type: DataType.FLOAT })
   amount: number;
 
   @Unique
