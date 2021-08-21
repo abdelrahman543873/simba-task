@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { hashPass } from 'src/utils/bcrypt.util';
+import { hashPass } from '../utils/bcrypt.util';
 import { RegisterInput } from './inputs/user.input';
 import { User } from './models/user.model';
 

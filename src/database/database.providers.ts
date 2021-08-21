@@ -14,6 +14,7 @@ export const databaseProviders = [
         username: env.username,
         dialect: 'postgres',
         password: env.password,
+        logging: false,
       });
       sequelize.addModels([User]);
       await sequelize.sync();

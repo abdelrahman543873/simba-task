@@ -1,6 +1,6 @@
 import { env } from './../utils/env';
 import { Injectable } from '@nestjs/common';
-import { BaseHttpException } from 'src/exceptions/base-http-exception';
+import { BaseHttpException } from '../exceptions/base-http-exception';
 import { UserRepository } from '../user/user.repository';
 import { AuthInput } from './inputs/auth.input';
 import { bcryptCheckPass } from '../utils/bcrypt.util';
