@@ -20,4 +20,21 @@ describe('user register suite case', () => {
     });
     expect(res1.body.length).toBe(1);
   });
+
+  it('should throw error if a user exists with the same email', async () => {
+    const user = await buildUserParams();
+    const res = await testRequest({
+      method: HTTP_METHODS_ENUM.POST,
+      url: REGISTER,
+      variables: user,
+    });
+    expect(res.body.name).toBe(user.name);
+    expect(res.body.address).toBe(user.address);
+    const res1 = await testRequest({
+      method: HTTP_METHODS_ENUM.POST,
+      url: REGISTER,
+      variables: user,
+    });
+    expect(res1.body.statusCode).toBe(607);
+  });
 });

@@ -16,4 +16,8 @@ export const LocalizedErrorMessages: IErrorMessage = {
     EN: 'the user you are sending the money to has different currency type',
     AR: 'the user you are sending the money to has different currency type',
   },
+  607: {
+    EN: 'a user with the same email exists',
+    AR: 'a user with the same email exists',
+  },
 };
