@@ -1,4 +1,3 @@
-import { Request } from 'express';
 import { IncomingHttpHeaders } from 'http';
 
 export const getAuthToken = (req: IncomingHttpHeaders): string => {
