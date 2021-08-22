@@ -12,16 +12,22 @@ export class UserRepository {
 
   async addUser(user: RegisterInput) {
     return await this.sequelize.transaction(async (transaction) => {
-      const userRecord = await this.Model.create({
-        ...user,
-        password: await hashPass(user.password),
-      });
-      await Transaction.create({
-        from: null,
-        to: userRecord.id,
-        currency: 'USD',
-        amount: 1000,
-      });
+      const userRecord = await this.Model.create(
+        {
+          ...user,
+          password: await hashPass(user.password),
+        },
+        { transaction },
+      );
+      await Transaction.create(
+        {
+          from: null,
+          to: userRecord.id,
+          currency: 'USD',
+          amount: 1000,
+        },
+        { transaction },
+      );
       return userRecord.toJSON();
     });
   }
