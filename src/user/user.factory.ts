@@ -20,7 +20,7 @@ export const buildUserParams = (obj?: UserType): UserType => {
     name: obj?.name || internet.userName(),
     email: obj?.email || internet.email(),
     balance: obj?.balance || +finance.amount(),
-    currency: obj?.currency || finance.currencyCode(),
+    currency: obj?.currency || 'USD',
   };
 };
 

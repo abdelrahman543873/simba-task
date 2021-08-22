@@ -12,4 +12,8 @@ export const LocalizedErrorMessages: IErrorMessage = {
     EN: "can't send money to yourself!",
     AR: "can't send money to yourself!",
   },
+  606: {
+    EN: 'the user you are sending the money to has different currency type',
+    AR: 'the user you are sending the money to has different currency type',
+  },
 };

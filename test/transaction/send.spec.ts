@@ -38,7 +38,7 @@ describe('send money suite case', () => {
         to: receiver.email,
         amount: 5,
         exchangeRate: 2,
-        targetCurrency: 'NGN',
+        targetCurrency: 'USD',
       },
     });
     expect(res.body.statusCode).toBe(603);
@@ -75,5 +75,22 @@ describe('send money suite case', () => {
       },
     });
     expect(res.body.statusCode).toBe(605);
+  });
+
+  it('should throw error if receiver currency is different than transaction currency', async () => {
+    const sender = await userFactory({ balance: 5 });
+    const receiver = await userFactory({ balance: 5 });
+    const res = await testRequest({
+      method: HTTP_METHODS_ENUM.POST,
+      url: SEND_TRANSACTION,
+      token: sender.token,
+      variables: {
+        to: receiver.email,
+        amount: 5,
+        exchangeRate: 2,
+        targetCurrency: 'NGN',
+      },
+    });
+    expect(res.body.statusCode).toBe(606);
   });
 });

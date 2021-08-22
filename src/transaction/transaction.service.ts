@@ -20,6 +20,8 @@ export class TransactionService {
       throw new BaseHttpException(LangEnum.EN, 605);
     const receivingUser = await this.userRepo.findUserByEmail(input.to);
     if (!receivingUser) throw new BaseHttpException(LangEnum.EN, 600);
+    if (receivingUser.currency !== input.targetCurrency)
+      throw new BaseHttpException(LangEnum.EN, 606);
     const convertedMoney = input.amount * input.exchangeRate;
     if (convertedMoney > this.request.currentUser.balance)
       throw new BaseHttpException(LangEnum.EN, 603);
