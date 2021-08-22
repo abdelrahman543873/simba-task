@@ -1,20 +1,26 @@
 version: '3.7'
 services:
-  simba-task:
-    image: simba-task
-    build: .
-    env_file: .env
-    restart: always
-    volumes:
-      - ./public:/app/public
-    ports:
-      - '3000:3000'
-    depends_on:
-      - simba-task-db
   simba-task-db:
     image: 'postgres'
     ports:
       - 5432:5432
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: pgpassword
+      POSTGRES_DB: mydatabase
     volumes:
-      - ./simba-task-db:/var/lib/postgres
-      - ./externalVolumes/db:/data/db
+      - simba-task-db:/var/lib/postgresql/data
+
+  simba-task:
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      - simba-task-db
+    environment:
+      DB_SCHEMA: mydatabase
+      DB_USER: username
+      DB_PASSWORD: pgpassword
+
+volumes:
+  simba-task-db:
