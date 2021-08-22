@@ -40,10 +40,12 @@ export class User extends Model {
   email: string;
 
   @AllowNull(false)
+  @Default(0)
   @Column({ type: DataType.FLOAT })
   balance: number;
 
   @AllowNull(false)
+  @Default('USD')
   @Column
   currency: string;
 
