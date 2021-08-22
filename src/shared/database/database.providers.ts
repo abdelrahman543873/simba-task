@@ -15,6 +15,7 @@ export const databaseProviders = [
         dialect: 'postgres',
         password: env.password,
         logging: false,
+        sync: { force: true, alter: true },
       });
       sequelize.addModels([User, Transaction]);
       await sequelize.sync();

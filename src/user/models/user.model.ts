@@ -6,7 +6,6 @@ import {
   Default,
   PrimaryKey,
   AllowNull,
-  Unique,
 } from 'sequelize-typescript';
 
 @Table({

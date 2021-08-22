@@ -21,7 +21,7 @@ export class UserRepository {
       );
       await Transaction.create(
         {
-          from: null,
+          from: userRecord.id,
           to: userRecord.id,
           currency: 'USD',
           amount: 1000,
