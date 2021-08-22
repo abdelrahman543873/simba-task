@@ -33,4 +33,5 @@ $ yarn test
 
 # notes
 
-nestjs framework was chosen here to allow for easier documentation of the api using , swagger ui and nestjs/swagger i am able to document the whole api using decorators which is amazing
+nestjs framework was chosen here to allow for easier documentation of the api using , swagger ui and nestjs/swagger i am able to document the whole api using decorators which is amazing.
+it also allows for a scalable stable architecture which the nestjs framework provides through out of the box services like dependency injection. 
