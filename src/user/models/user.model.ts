@@ -11,8 +11,6 @@ import {
 
 @Table({
   timestamps: true,
-  paranoid: true,
-  indexes: [],
 })
 export class User extends Model {
   @PrimaryKey
@@ -34,7 +32,11 @@ export class User extends Model {
 
   @Unique
   @AllowNull(false)
-  @Column
+  @Column({
+    set(val: string) {
+      if (val) this.setDataValue('email', val.toLowerCase());
+    },
+  })
   email: string;
 
   @AllowNull(false)

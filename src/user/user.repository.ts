@@ -4,7 +4,7 @@ import { hashPass } from '../shared/utils/bcrypt.util';
 import { RegisterInput } from './inputs/user.input';
 import { User } from './models/user.model';
 import { Transaction } from '../transaction/models/transaction.model';
-
+import { Op } from 'sequelize';
 @Injectable()
 export class UserRepository {
   constructor(@Inject('SEQUELIZE') private readonly sequelize: Sequelize) {}
@@ -28,7 +28,7 @@ export class UserRepository {
 
   async findUserByEmail(email: string) {
     return await this.Model.findOne({
-      where: { email },
+      where: { email: { [Op.iLike]: email } },
       raw: true,
     });
   }

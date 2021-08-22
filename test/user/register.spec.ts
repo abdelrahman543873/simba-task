@@ -3,6 +3,7 @@ import { testRequest } from '../request';
 import { HTTP_METHODS_ENUM } from '../request.methods.enum';
 import { buildUserParams } from '../../src/user/user.factory';
 import { GET_MY_TRANSACTIONS } from '../endpoints/transaction';
+import { User } from '../../src/user/models/user.model';
 describe('user register suite case', () => {
   it('register user and should have a transaction of 1000 usd', async () => {
     const user = await buildUserParams();
