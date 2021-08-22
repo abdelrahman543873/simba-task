@@ -30,7 +30,6 @@ export class User extends Model {
   @Column
   password: string;
 
-  @Unique
   @AllowNull(false)
   @Column({
     set(val: string) {
