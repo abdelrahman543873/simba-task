@@ -13,11 +13,7 @@ async function bootstrap() {
     .addTag('user')
     .addTag('auth')
     .addTag('transaction')
-    .addBearerAuth({
-      type: 'apiKey',
-      name: 'authorization',
-      bearerFormat: 'Bearer token',
-    })
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
